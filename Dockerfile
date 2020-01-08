@@ -5,6 +5,13 @@ FROM alpine:3.10
 
 RUN apk add -U --no-cache ca-certificates
 
+COPY run.sh /
+RUN chmod a+x /run.sh
+
+ENTRYPOINT ["/bin/sh"]
+
+CMD ["/run.sh"]
+
 FROM scratch
 
 COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
